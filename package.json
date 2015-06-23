@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/zhuyingda/zippo-react",
   "dependencies": {
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
   }
 }
