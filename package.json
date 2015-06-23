@@ -1,0 +1,18 @@
+{
+  "name": "zippo-react",
+  "version": "0.0.1",
+  "description": "Octopus widgets for React components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xingyan/react-octopus.git"
+  },
+  "author": "zhuyingda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuyingda/zippo-react/issues"
+  },
+  "homepage": "https://github.com/zhuyingda/zippo-react",
+  "dependencies": {
+    "react": "^0.13.3"
+  }
+}
