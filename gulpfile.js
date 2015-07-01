@@ -18,7 +18,7 @@ var paths = {
 // Dependency tasks should call the callback to tell the parent task that
 // they're done.
 gulp.task('clean', function(done) {
-    del(['build'], done);
+    del(['./dist/bundle.js'], done);
 });
 
 
@@ -30,7 +30,7 @@ gulp.task('js', ['clean'], function() {
         .bundle()
         .pipe(source('bundle.js'))
         // .pipe(streamify(uglify()))
-        .pipe(gulp.dest('./src/'));
+        .pipe(gulp.dest('./dist/'));
 });
 
 // Rerun tasks whenever a file changes.
