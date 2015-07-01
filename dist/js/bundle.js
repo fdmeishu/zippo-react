@@ -19816,15 +19816,15 @@ var Pager = require('./pager/pager');
 var App = React.createClass({displayName: "App",
   render: function () {
     return (
-      React.createElement("div", null, 
-        React.createElement("div", null, "Hello ", this.props.name), 
+      React.createElement("div", {class: "book"}, 
+        React.createElement("div", {class: "content"}, "Hello ", this.props.name), 
         React.createElement(Pager, {thick: "abcdefg"})
       )
     );
   }
 });
 
-React.render(React.createElement(App, {name: "John"}), document.body);
+React.render(React.createElement(App, {name: "John"}), document.getElementById('root'));
 
 },{"./pager/pager":158,"react":156}],158:[function(require,module,exports){
 /*

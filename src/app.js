@@ -5,12 +5,12 @@ var Pager = require('./pager/pager');
 var App = React.createClass({
   render: function () {
     return (
-      <div>
-        <div>Hello {this.props.name}</div>
+      <div class="book">
+        <div class="content">Hello {this.props.name}</div>
         <Pager thick='abcdefg' />
       </div>
     );
   }
 });
 
-React.render(<App name="John" />, document.body);
+React.render(<App name="John" />, document.getElementById('root'));

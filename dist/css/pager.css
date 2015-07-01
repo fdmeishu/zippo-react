@@ -1,0 +1,18 @@
+.a {
+  margin: 0 auto;
+}
+.a .b {
+  margin-bottom: 1%;
+}
+.a .c {
+  margin-left: auto;
+}
+.base {
+  margin: 0;
+  padding: 0;
+}
+.test {
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+}
