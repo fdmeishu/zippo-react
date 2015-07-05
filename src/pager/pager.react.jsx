@@ -4,6 +4,11 @@
 var React = require('react');
 
 var Pager = React.createClass({
+  getDefaultProps : function () {
+    return {
+      count : 12
+    };
+  },
   render : function () {
     return (
       <div className="z_pager_container clearfix">

@@ -7,36 +7,39 @@ var less = require('gulp-less');
 var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
 
-
 var paths = {
   app_js: ['./src/app.js'],
   pager: './demo/pager/'
 };
 
-gulp.task('clean', function (done) {
-  del(['./dist/bundle.js'], done);
+gulp.task('clean', function () {
+  del(['./demo/pager/static/*.less'],{force:true});
 });
 
-
-gulp.task('js', function () {
-  browserify(paths['pager']+'src.js')
-    .transform(reactify)
-    .bundle()
-    .pipe(source('dist.js'))
-    // .pipe(streamify(uglify()))
-    .pipe(gulp.dest(paths['pager']));
+gulp.task('build:pager', ['clean'], function () {
+  //browserify('./demo/pager/src.js')
+  //  .transform(reactify)
+  //  .bundle()
+  //  .pipe(source('dist.js'))
+  //  // .pipe(streamify(uglify()))
+  //  .pipe(gulp.dest('./demo/pager/static'));
+  //gulp.src('./src/pager/*.less')
+  //  .pipe(less())
+  //  .pipe(gulp.dest('./demo/pager/static'));
+  gulp.src('./src/pager/*.less')
+  .pipe(gulp.dest('./demo/pager/static'));
 });
+
+gulp.task('run', ['build:pager']);
 
 gulp.task('less', function () {
-  return gulp.src('./src/**/*.less')
+  return gulp.src('./src/pager/*.less')
     .pipe(less())
     .pipe(gulp.dest('./demo'));
 });
 
 gulp.task('watch', function () {
-  gulp.watch(paths.js, ['js']);
-  gulp.watch(paths.app_js, ['js']);
+  gulp.watch('./src/pager/*', ['build:pager']);
 });
 
-
-gulp.task('default', ['watch', 'js', 'less']);
+gulp.task('default', ['watch', 'run']);

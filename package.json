@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "lazypipe": "^1.0.1",
     "react": "^0.13.3"
   }
 }
