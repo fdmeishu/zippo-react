@@ -13,21 +13,19 @@ var paths = {
 };
 
 gulp.task('clean', function () {
-  del(['./demo/pager/static/*.less'],{force:true});
+  del(['./demo/pager/static/*.css','./demo/pager/static/*.js'],{force:true});
 });
 
 gulp.task('build:pager', ['clean'], function () {
-  //browserify('./demo/pager/src.js')
-  //  .transform(reactify)
-  //  .bundle()
-  //  .pipe(source('dist.js'))
-  //  // .pipe(streamify(uglify()))
-  //  .pipe(gulp.dest('./demo/pager/static'));
-  //gulp.src('./src/pager/*.less')
-  //  .pipe(less())
-  //  .pipe(gulp.dest('./demo/pager/static'));
+  browserify('./demo/pager/src.js')
+    .transform(reactify)
+    .bundle()
+    .pipe(source('dist.js'))
+    // .pipe(streamify(uglify()))
+    .pipe(gulp.dest('./demo/pager/static'));
   gulp.src('./src/pager/*.less')
-  .pipe(gulp.dest('./demo/pager/static'));
+    .pipe(less())
+    .pipe(gulp.dest('./demo/pager/static'));
 });
 
 gulp.task('run', ['build:pager']);
