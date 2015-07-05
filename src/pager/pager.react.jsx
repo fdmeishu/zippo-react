@@ -6,7 +6,7 @@ var React = require('react');
 var Pager = React.createClass({
   getDefaultProps : function () {
     return {
-      count : 12
+      count : 20
     };
   },
   render : function () {
