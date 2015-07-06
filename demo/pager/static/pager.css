@@ -37,7 +37,7 @@
   border: 1px solid #dddddd;
   border-collapse: collapse;
   float: left;
-  margin-left: -2px;
+  margin-left: -1px;
 }
 .z_pager_container .z_pager_last {
   color: #337ab7;

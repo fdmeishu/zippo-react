@@ -6,10 +6,28 @@ var React = require('react');
 var Pager = React.createClass({
   getDefaultProps : function () {
     return {
-      count : 20
+      itemsTotal : 0,
+      itemsInPage : 10,
+      btnLimit : 10,
+      onTurn : function () {
+        console.log('未绑定翻页回调');
+      }
     };
   },
+  getInitialState : function () {
+    return {
+      curPage : 1,
+      btnArr : [],
+      itemsTotal : 0
+    }
+  },
+  componentWillMount : function () {
+
+  },
   render : function () {
+    var pages = this.state.btnArr.map(function (i) {
+      
+    }).bind(this);
     return (
       <div className="z_pager_container clearfix">
         <div className="z_pager_first">首页</div>
