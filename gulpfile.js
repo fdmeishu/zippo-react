@@ -17,12 +17,12 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build:pager', ['clean'], function () {
-  //browserify('./demo/pager/src.js')
-  //  .transform(reactify)
-  //  .bundle()
-    //.pipe(source('dist.js'))
+  browserify('./demo/pager/src.js')
+    .transform(reactify)
+    .bundle()
+    .pipe(source('dist.js'))
     // .pipe(streamify(uglify()))
-    //.pipe(gulp.dest('./demo/pager/static'));
+    .pipe(gulp.dest('./demo/pager/static'));
   gulp.src('./src/pager/*.less')
     .pipe(less())
     .pipe(gulp.dest('./demo/pager/static'));

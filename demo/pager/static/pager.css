@@ -2,9 +2,14 @@
   color: #337ab7;
   padding: 10px;
   font-size: 14px;
-  cursor: pointer;
   border: 1px solid #dddddd;
   border-collapse: collapse;
+  float: left;
+  margin-left: -1px;
+  /*
+  解决IOS手机onClick失效
+  */
+  cursor: pointer;
 }
 .base-button:hover {
   background: #eeeeee;
@@ -13,39 +18,64 @@
   color: #337ab7;
   padding: 10px;
   font-size: 14px;
-  cursor: pointer;
   border: 1px solid #dddddd;
   border-collapse: collapse;
   float: left;
   margin-left: -1px;
+  /*
+  解决IOS手机onClick失效
+  */
+  cursor: pointer;
 }
 .z_pager_container .z_pager_prev {
   color: #337ab7;
   padding: 10px;
   font-size: 14px;
-  cursor: pointer;
   border: 1px solid #dddddd;
   border-collapse: collapse;
   float: left;
   margin-left: -1px;
+  /*
+  解决IOS手机onClick失效
+  */
+  cursor: pointer;
 }
 .z_pager_container .z_pager_next {
   color: #337ab7;
   padding: 10px;
   font-size: 14px;
-  cursor: pointer;
   border: 1px solid #dddddd;
   border-collapse: collapse;
   float: left;
   margin-left: -1px;
+  /*
+  解决IOS手机onClick失效
+  */
+  cursor: pointer;
 }
 .z_pager_container .z_pager_last {
   color: #337ab7;
   padding: 10px;
   font-size: 14px;
-  cursor: pointer;
   border: 1px solid #dddddd;
   border-collapse: collapse;
   float: left;
   margin-left: -1px;
+  /*
+  解决IOS手机onClick失效
+  */
+  cursor: pointer;
+}
+.z_pager_container .z_pager_page {
+  color: #337ab7;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  float: left;
+  margin-left: -1px;
+  /*
+  解决IOS手机onClick失效
+  */
+  cursor: pointer;
 }
