@@ -3,6 +3,9 @@ var React = require('react');
 var Pager = require('../../src/pager/pager.react.jsx');
 
 var App = React.createClass({
+  test: function(i) {
+    console.log('当前页为：',i)
+  },
   render: function () {
     return (
       <div className="book">
@@ -11,7 +14,7 @@ var App = React.createClass({
           <p>12345</p>
           <p>455235</p>
         </div>
-        <Pager />
+        <Pager onTurn={this.test} />
       </div>
     );
   }

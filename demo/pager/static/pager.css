@@ -14,7 +14,7 @@
 .base-button:hover {
   background: #eeeeee;
 }
-.z_pager_container .z_pager_first {
+.z_pager_container .z_pager_head {
   color: #337ab7;
   padding: 10px;
   font-size: 14px;
@@ -78,4 +78,8 @@
   解决IOS手机onClick失效
   */
   cursor: pointer;
+}
+.z_pager_container .z_pager_page.z_pager_cur {
+  background: #337ab7;
+  color: #ffffff;
 }
