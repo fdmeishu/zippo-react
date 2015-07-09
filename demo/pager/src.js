@@ -14,7 +14,7 @@ var App = React.createClass({
           <p>12345</p>
           <p>455235</p>
         </div>
-        <Pager onTurn={this.test} />
+        <Pager onTurn={this.test} itemsTotal={100}/>
       </div>
     );
   }

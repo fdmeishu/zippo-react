@@ -15,7 +15,7 @@ var App = React.createClass({displayName: "App",
           React.createElement("p", null, "12345"), 
           React.createElement("p", null, "455235")
         ), 
-        React.createElement(Pager, {onTurn: this.test})
+        React.createElement(Pager, {onTurn: this.test, itemsTotal: 100})
       )
     );
   }
@@ -19888,38 +19888,53 @@ var Pager = React.createClass({displayName: "Pager",
     });
   },
   _pagesCal : function (num) {
-    var begin,tmpArr;
-    if(num <= Math.round(this.props.itemsInPage/2)){
+    var begin,tmpArr=[];
+    if(num <= this._getMedian()){
       begin = 1;
-    }else if(num > Math.round(this.props.itemsInPage/2) && Math.abs((Math.ceil(this.state.itemsTotal/this.state.itemsInPage)-1)-num) >= Math.round(this.props.itemsInPage/2)){
-      begin = num - Math.round(this.props.itemsInPage/2) + 1;
-    }else if(Math.abs((Math.ceil(this.state.itemsTotal/this.state.itemsInPage)-1)-num) < Math.round(this.props.itemsInPage/2)){
-      if(Math.ceil(this.state.itemsTotal/this.state.itemsInPage) > this.props.itemsInPage){
-        begin = Math.ceil(this.state.itemsTotal/this.state.itemsInPage) - this.props.itemsInPage;
+    }else if(num > this._getMedian() && Math.abs((this._getPageLen()-1)-num) >= this._getMedian()){
+      begin = num - this._getMedian() + 1;
+    }else if(Math.abs((this._getPageLen()-1)-num) < this._getMedian()){
+      if(this._getPageLen() > this.props.itemsInPage){
+        begin = this._getPageLen() - this.props.itemsInPage;
       }else{
         begin = 1;
       }
     }
-    for(var i=begin;i<Math.ceil(this.state.itemsTotal/this.state.itemsInPage);i++){
+    for(var i=begin;i<=this._getPageLen();i++){
       tmpArr.push(i);
     }
-    this.state.pages = tmpArr;
+    this.setState({
+      pages : tmpArr,
+      curPage : num
+    });
+  },
+  _getPageLen : function () {
+    return Math.ceil(this.state.itemsTotal/this.props.itemsInPage);
+  },
+  _getMedian : function () {
+    return Math.round(this.props.itemsInPage/2);
   },
   _turnTo : function (num) {
     this.props.onTurn(num);
     this._pagesCal(num);
   },
   _turnNext :  function () {
-    this.props.onTurn(this.state.curPage+1);
+    var curPage = this.state.curPage;
+    this.props.onTurn(curPage+1);
+    this._pagesCal(curPage+1);
   },
   _turnPrev :  function () {
-    this.props.onTurn(this.state.curPage-1);
+    var curPage = this.state.curPage;
+    this.props.onTurn(curPage-1);
+    this._pagesCal(curPage+1);
   },
   _toHead :  function () {
     this.props.onTurn(1);
+    this._pagesCal(curPage+1);
   },
   _toLast :  function () {
-    this.props.onTurn(Math.ceil(this.state.itemsTotal/this.state.itemsInPage));
+    this.props.onTurn(this._getPageLen());
+    this._pagesCal(this._getPageLen());
   },
   render : function () {
     var pages = this.state.pages.map(function (i) {
