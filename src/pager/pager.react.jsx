@@ -2,29 +2,7 @@
 * 分页组件
 * */
 var React = require('react');
-
-var PagerBtn = React.createClass({
-  getDefaultProps: function () {
-    return {
-      isCur: false,
-      num: 0
-    }
-  },
-  _fn: function () {
-    this.props.hasNum(this.props.num);
-  },
-  render: function () {
-    if (this.props.isCur) {
-      return (
-        <div className="z_pager_page z_pager_cur" onClick={this._fn}>{this.props.num}</div>
-      );
-    } else {
-      return (
-        <div className="z_pager_page" onClick={this._fn}>{this.props.num}</div>
-      );
-    }
-  }
-});
+var PagerBtn = require('./pager-btn.react.jsx');
 
 var Pager = React.createClass({
   getDefaultProps : function () {
@@ -55,16 +33,16 @@ var Pager = React.createClass({
     var begin,tmpArr=[];
     if(num <= this._getMedian()){
       begin = 1;
-    }else if(num > this._getMedian() && Math.abs((this._getPageLen()-1)-num) >= this._getMedian()){
+    }else if(num > this._getMedian() && Math.abs((this._getPageLen())-num) >= this._getMedian()){
       begin = num - this._getMedian() + 1;
-    }else if(Math.abs((this._getPageLen()-1)-num) < this._getMedian()){
+    }else if(Math.abs((this._getPageLen())-num) < this._getMedian()){
       if(this._getPageLen() > this.props.itemsInPage){
-        begin = this._getPageLen() - this.props.itemsInPage;
+        begin = this._getPageLen() - this.props.btnLimit + 1;
       }else{
         begin = 1;
       }
     }
-    for(var i=begin;i<=this._getPageLen();i++){
+    for(var i=begin ;i< begin+this.props.btnLimit ;i++){
       tmpArr.push(i);
     }
     this.setState({
@@ -82,19 +60,19 @@ var Pager = React.createClass({
     this.props.onTurn(num);
     this._pagesCal(num);
   },
-  _turnNext :  function () {
+  _turnNext : function () {
     var curPage = this.state.curPage;
     this.props.onTurn(curPage+1);
     this._pagesCal(curPage+1);
   },
-  _turnPrev :  function () {
+  _turnPrev : function () {
     var curPage = this.state.curPage;
     this.props.onTurn(curPage-1);
-    this._pagesCal(curPage+1);
+    this._pagesCal(curPage-1);
   },
   _toHead :  function () {
     this.props.onTurn(1);
-    this._pagesCal(curPage+1);
+    this._pagesCal(1);
   },
   _toLast :  function () {
     this.props.onTurn(this._getPageLen());

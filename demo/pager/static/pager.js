@@ -15,7 +15,7 @@ var App = React.createClass({displayName: "App",
           React.createElement("p", null, "12345"), 
           React.createElement("p", null, "455235")
         ), 
-        React.createElement(Pager, {onTurn: this.test, itemsTotal: 100})
+        React.createElement(Pager, {onTurn: this.test, itemsTotal: 183})
       )
     );
   }
@@ -23,7 +23,7 @@ var App = React.createClass({displayName: "App",
 
 React.render(React.createElement(App, null), document.getElementById('root'));
 
-},{"../../src/pager/pager.react.jsx":158,"react":157}],2:[function(require,module,exports){
+},{"../../src/pager/pager.react.jsx":159,"react":157}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -19834,9 +19834,6 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":30}],158:[function(require,module,exports){
-/*
-* 分页组件
-* */
 var React = require('react');
 
 var PagerBtn = React.createClass({displayName: "PagerBtn",
@@ -19846,21 +19843,30 @@ var PagerBtn = React.createClass({displayName: "PagerBtn",
       num: 0
     }
   },
-  _fn: function () {
+  _cb: function () {
     this.props.hasNum(this.props.num);
   },
   render: function () {
     if (this.props.isCur) {
       return (
-        React.createElement("div", {className: "z_pager_page z_pager_cur", onClick: this._fn}, this.props.num)
+        React.createElement("div", {className: "z_pager_page z_pager_cur", onClick: this._cb}, this.props.num)
       );
     } else {
       return (
-        React.createElement("div", {className: "z_pager_page", onClick: this._fn}, this.props.num)
+        React.createElement("div", {className: "z_pager_page", onClick: this._cb}, this.props.num)
       );
     }
   }
 });
+
+module.exports = PagerBtn;
+
+},{"react":157}],159:[function(require,module,exports){
+/*
+* 分页组件
+* */
+var React = require('react');
+var PagerBtn = require('./pager-btn.react.jsx');
 
 var Pager = React.createClass({displayName: "Pager",
   getDefaultProps : function () {
@@ -19891,16 +19897,16 @@ var Pager = React.createClass({displayName: "Pager",
     var begin,tmpArr=[];
     if(num <= this._getMedian()){
       begin = 1;
-    }else if(num > this._getMedian() && Math.abs((this._getPageLen()-1)-num) >= this._getMedian()){
+    }else if(num > this._getMedian() && Math.abs((this._getPageLen())-num) >= this._getMedian()){
       begin = num - this._getMedian() + 1;
-    }else if(Math.abs((this._getPageLen()-1)-num) < this._getMedian()){
+    }else if(Math.abs((this._getPageLen())-num) < this._getMedian()){
       if(this._getPageLen() > this.props.itemsInPage){
-        begin = this._getPageLen() - this.props.itemsInPage;
+        begin = this._getPageLen() - this.props.btnLimit + 1;
       }else{
         begin = 1;
       }
     }
-    for(var i=begin;i<=this._getPageLen();i++){
+    for(var i=begin ;i< begin+this.props.btnLimit ;i++){
       tmpArr.push(i);
     }
     this.setState({
@@ -19918,19 +19924,19 @@ var Pager = React.createClass({displayName: "Pager",
     this.props.onTurn(num);
     this._pagesCal(num);
   },
-  _turnNext :  function () {
+  _turnNext : function () {
     var curPage = this.state.curPage;
     this.props.onTurn(curPage+1);
     this._pagesCal(curPage+1);
   },
-  _turnPrev :  function () {
+  _turnPrev : function () {
     var curPage = this.state.curPage;
     this.props.onTurn(curPage-1);
-    this._pagesCal(curPage+1);
+    this._pagesCal(curPage-1);
   },
   _toHead :  function () {
     this.props.onTurn(1);
-    this._pagesCal(curPage+1);
+    this._pagesCal(1);
   },
   _toLast :  function () {
     this.props.onTurn(this._getPageLen());
@@ -19962,4 +19968,4 @@ var Pager = React.createClass({displayName: "Pager",
 
 module.exports = Pager;
 
-},{"react":157}]},{},[1]);
+},{"./pager-btn.react.jsx":158,"react":157}]},{},[1]);

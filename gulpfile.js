@@ -17,15 +17,19 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build:pager', ['clean'], function () {
-  browserify('./demo/pager/src.js')
+  browserify('./demo/pager/index.js')
     .transform(reactify)
     .bundle()
-    .pipe(source('dist.js'))
+    .pipe(source('pager.js'))
     // .pipe(streamify(uglify()))
-    .pipe(gulp.dest('./demo/pager/static'));
+    .pipe(gulp.dest('./demo/pager/static'))
+    .pipe(gulp.dest('../../devspace/nodeproxy/src/web_inf/front/public'));
   gulp.src('./src/pager/*.less')
     .pipe(less())
-    .pipe(gulp.dest('./demo/pager/static'));
+    .pipe(gulp.dest('./demo/pager/static'))
+    .pipe(gulp.dest('../../devspace/nodeproxy/src/web_inf/front/public'));
+  gulp.src('./demo/pager/pager.html')
+    .pipe(gulp.dest('./node/proxy/views'));
 });
 
 gulp.task('run', ['build:pager']);
